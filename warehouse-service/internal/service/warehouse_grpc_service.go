@@ -2,10 +2,11 @@ package service
 
 import (
 	"context"
-	"ecommerce/internal/models"
-	"ecommerce/internal/pkg/logger"
-	"ecommerce/internal/repository"
-	pb "ecommerce/proto/warehouse"
+
+	"github.com/ilhamabdlh/ecommerce/internal/models"
+	"github.com/ilhamabdlh/ecommerce/internal/pkg/logger"
+	"github.com/ilhamabdlh/ecommerce/internal/repository"
+	pb "github.com/ilhamabdlh/ecommerce/proto"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.uber.org/zap"

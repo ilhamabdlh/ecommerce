@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	pb "ecommerce/proto/product"
+	pb "github.com/ilhamabdlh/ecommerce/proto"
 
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/grpc"

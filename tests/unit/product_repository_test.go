@@ -5,8 +5,8 @@ import (
 	"testing"
 	"time"
 
-	"ecommerce/internal/models"
-	"ecommerce/internal/repository"
+	"github.com/ilhamabdlh/ecommerce/internal/models"
+	"github.com/ilhamabdlh/ecommerce/internal/repository"
 
 	"github.com/stretchr/testify/assert"
 	"go.mongodb.org/mongo-driver/mongo"

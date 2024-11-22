@@ -5,8 +5,8 @@ import (
 	"net"
 	"os"
 
-	pb "ecommerce/proto/user"
-	"ecommerce/user-service/internal/service"
+	pb "github.com/ilhamabdlh/ecommerce/proto"
+	"github.com/ilhamabdlh/ecommerce/user-service/internal/service"
 
 	"google.golang.org/grpc"
 )

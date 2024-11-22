@@ -7,10 +7,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"ecommerce/internal/config"
-	"ecommerce/internal/handlers"
-	"ecommerce/internal/models"
-	"ecommerce/internal/repository"
+	"github.com/ilhamabdlh/ecommerce/internal/config"
+	"github.com/ilhamabdlh/ecommerce/internal/handlers"
+	"github.com/ilhamabdlh/ecommerce/internal/models"
+	"github.com/ilhamabdlh/ecommerce/internal/repository"
 
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"

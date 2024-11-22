@@ -1,14 +1,15 @@
 package main
 
 import (
-	"ecommerce/docs" // swagger docs
-	"ecommerce/internal/config"
-	"ecommerce/internal/handlers"
-	"ecommerce/internal/middleware"
-	"ecommerce/internal/pkg/logger"
-	"ecommerce/internal/repository"
 	"os"
 	"time"
+
+	"github.com/ilhamabdlh/ecommerce/docs" // swagger docs
+	"github.com/ilhamabdlh/ecommerce/internal/config"
+	"github.com/ilhamabdlh/ecommerce/internal/handlers"
+	"github.com/ilhamabdlh/ecommerce/internal/middleware"
+	"github.com/ilhamabdlh/ecommerce/internal/pkg/logger"
+	"github.com/ilhamabdlh/ecommerce/internal/repository"
 
 	"github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"

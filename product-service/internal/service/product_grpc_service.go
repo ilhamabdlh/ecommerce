@@ -2,9 +2,10 @@ package service
 
 import (
 	"context"
-	"ecommerce/internal/pkg/logger"
-	"ecommerce/internal/repository"
-	pb "ecommerce/proto/product"
+
+	"github.com/ilhamabdlh/ecommerce/internal/pkg/logger"
+	"github.com/ilhamabdlh/ecommerce/internal/repository"
+	pb "github.com/ilhamabdlh/ecommerce/proto"
 
 	"go.uber.org/zap"
 )

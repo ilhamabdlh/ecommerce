@@ -3,7 +3,8 @@ package service
 import (
 	"context"
 	"database/mongo"
-	pb "ecommerce/proto/product"
+
+	pb "github.com/ilhamabdlh/ecommerce/proto"
 
 	"google.golang.org/genproto/googleapis/rpc/status"
 	"google.golang.org/grpc/codes"

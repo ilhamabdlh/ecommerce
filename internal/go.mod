@@ -1,4 +1,4 @@
-module github.com/yourusername/ecommerce/internal
+module github.com/ilhamabdlh/ecommerce/internal
 
 go 1.21
 

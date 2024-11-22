@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package warehouse;
 
-option go_package = "github.com/yourusername/ecommerce/proto/warehouse";
+option go_package = "github.com/ilhamabdlh/ecommerce/proto/warehouse";
 
 service WarehouseService {
     rpc TransferStock(TransferStockRequest) returns (TransferStockResponse);

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user;
 
-option go_package = "github.com/yourusername/ecommerce/proto/user";
+option go_package = "github.com/ilhamabdlh/ecommerce/proto/user";
 
 service UserService {
     rpc Register(RegisterRequest) returns (User);
