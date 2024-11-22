@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package product;
+option go_package = "ecommerce/proto/product";
+
+service ProductService {
+  rpc GetProduct(GetProductRequest) returns (Product) {}
+  rpc UpdateStock(UpdateStockRequest) returns (UpdateStockResponse) {}
+  rpc ListProducts(ListProductsRequest) returns (ListProductsResponse) {}
+}
+
+message GetProductRequest {
+  string id = 1;
+}
+
+message Product {
+  string id = 1;
+  string name = 2;
+  int32 stock = 3;
+  double price = 4;
+}
+
+message UpdateStockRequest {
+  string product_id = 1;
+  int32 quantity = 2;
+  string warehouse_id = 3;
+}
+
+message UpdateStockResponse {
+  bool success = 1;
+  string error = 2;
+}
+
+message ListProductsRequest {
+  int32 page = 1;
+  int32 limit = 2;
+}
+
+message ListProductsResponse {
+  repeated Product products = 1;
+  int32 total = 2;
+} 

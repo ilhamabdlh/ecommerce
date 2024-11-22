@@ -1,0 +1,12 @@
+go 1.21
+
+use (
+    .
+    ./pkg
+    ./proto
+    ./api-gateway
+    ./product-service
+    ./order-service
+    ./user-service
+    ./warehouse-service
+) 

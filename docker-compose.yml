@@ -1,0 +1,131 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - ecommerce-network
+
+  consul:
+    image: consul:latest
+    ports:
+      - "8500:8500"
+    networks:
+      - ecommerce-network
+
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"
+      - "14250:14250"
+    networks:
+      - ecommerce-network
+
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - ecommerce-network
+
+  api-gateway:
+    build:
+      context: .
+      dockerfile: api-gateway/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
+      - CONSUL_ADDR=consul:8500
+      - JAEGER_ENDPOINT=http://jaeger:14250
+      - PRODUCT_SERVICE_ADDR=product-service:50051
+      - ORDER_SERVICE_ADDR=order-service:50052
+      - USER_SERVICE_ADDR=user-service:50053
+      - WAREHOUSE_SERVICE_ADDR=warehouse-service:50054
+    depends_on:
+      - mongodb
+      - consul
+      - jaeger
+      - product-service
+      - order-service
+      - user-service
+      - warehouse-service
+    networks:
+      - ecommerce-network
+
+  product-service:
+    build:
+      context: .
+      dockerfile: product-service/Dockerfile
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
+      - CONSUL_ADDR=consul:8500
+      - JAEGER_ENDPOINT=http://jaeger:14250
+    depends_on:
+      - mongodb
+      - consul
+      - jaeger
+    networks:
+      - ecommerce-network
+
+  order-service:
+    build:
+      context: .
+      dockerfile: order-service/Dockerfile
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
+      - CONSUL_ADDR=consul:8500
+      - JAEGER_ENDPOINT=http://jaeger:14250
+      - PRODUCT_SERVICE_ADDR=product-service:50051
+    depends_on:
+      - mongodb
+      - consul
+      - jaeger
+      - product-service
+    networks:
+      - ecommerce-network
+
+  user-service:
+    build:
+      context: .
+      dockerfile: user-service/Dockerfile
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
+      - CONSUL_ADDR=consul:8500
+      - JAEGER_ENDPOINT=http://jaeger:14250
+    depends_on:
+      - mongodb
+      - consul
+      - jaeger
+    networks:
+      - ecommerce-network
+
+  warehouse-service:
+    build:
+      context: .
+      dockerfile: warehouse-service/Dockerfile
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017
+      - CONSUL_ADDR=consul:8500
+      - JAEGER_ENDPOINT=http://jaeger:14250
+      - PRODUCT_SERVICE_ADDR=product-service:50051
+    depends_on:
+      - mongodb
+      - consul
+      - jaeger
+      - product-service
+    networks:
+      - ecommerce-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  ecommerce-network:
+    driver: bridge 

@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package warehouse;
+
+option go_package = "github.com/yourusername/ecommerce/proto/warehouse";
+
+service WarehouseService {
+    rpc TransferStock(TransferStockRequest) returns (TransferStockResponse);
+    rpc UpdateStatus(UpdateStatusRequest) returns (UpdateStatusResponse);
+    rpc ListWarehouses(ListWarehousesRequest) returns (ListWarehousesResponse);
+    rpc GetStock(GetStockRequest) returns (GetStockResponse);
+}
+
+message Warehouse {
+    string id = 1;
+    string name = 2;
+    string location = 3;
+    string status = 4;
+}
+
+message TransferStockRequest {
+    string product_id = 1;
+    string from_warehouse_id = 2;
+    string to_warehouse_id = 3;
+    int32 quantity = 4;
+}
+
+message TransferStockResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message UpdateStatusRequest {
+    string warehouse_id = 1;
+    string status = 2;
+}
+
+message UpdateStatusResponse {
+    bool success = 1;
+    string message = 2;
+}
+
+message ListWarehousesRequest {}
+
+message ListWarehousesResponse {
+    repeated Warehouse warehouses = 1;
+}
+
+message GetStockRequest {
+    string product_id = 1;
+    string warehouse_id = 2;
+}
+
+message GetStockResponse {
+    int32 quantity = 1;
+} 

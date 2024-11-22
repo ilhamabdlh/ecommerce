@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warehouse-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: warehouse-service
+  template:
+    metadata:
+      labels:
+        app: warehouse-service
+    spec:
+      containers:
+      - name: warehouse-service
+        image: your-registry/warehouse-service:latest
+        ports:
+        - containerPort: 50054
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            configMapKeyRef:
+              name: ecommerce-config
+              key: MONGODB_URI
+        - name: PRODUCT_SERVICE_ADDR
+          value: "product-service:50051"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: warehouse-service
+spec:
+  selector:
+    app: warehouse-service
+  ports:
+  - port: 50054
+    targetPort: 50054
+  type: ClusterIP 

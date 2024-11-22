@@ -1,0 +1,40 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mongodb-backup-restore
+spec:
+  schedule: "0 2 * * *"  # Run at 2 AM every day
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mongodb-backup-restore
+            image: mongo:latest
+            command:
+            - /bin/sh
+            - -c
+            - |
+              # Check if restore is needed
+              if [ -f "/backup/restore-flag" ]; then
+                mongorestore --uri="${MONGODB_URI}" --gzip --archive=/backup/latest.gz
+                rm /backup/restore-flag
+              else
+                # Regular backup
+                mongodump --uri="${MONGODB_URI}" --gzip --archive=/backup/mongodb-$(date +%Y%m%d).gz
+                # Keep latest backup
+                cp /backup/mongodb-$(date +%Y%m%d).gz /backup/latest.gz
+              fi
+            env:
+            - name: MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: ecommerce-config
+                  key: MONGODB_URI
+            volumeMounts:
+            - name: backup
+              mountPath: /backup
+          volumes:
+          - name: backup
+            persistentVolumeClaim:
+              claimName: backup-pvc 
