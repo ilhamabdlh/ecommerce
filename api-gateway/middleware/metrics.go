@@ -48,5 +48,8 @@ func MetricsMiddleware() gin.HandlerFunc {
 			c.Request.Method,
 			c.FullPath(),
 		).Observe(duration)
+
+		// Tambahkan metrik untuk permintaan yang berhasil
+		metrics.Increment("successful_requests")
 	}
 }

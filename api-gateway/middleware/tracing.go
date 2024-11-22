@@ -28,5 +28,7 @@ func TracingMiddleware(serviceName string) gin.HandlerFunc {
 		span.SetAttributes(
 			attribute.Int("http.status_code", c.Writer.Status()),
 		)
+
+		tracer.StartSpan("request_handling")
 	}
 }

@@ -1,12 +1,12 @@
 package middleware
 
 import (
-	"ecommerce/internal/pkg/resilience"
 	"fmt"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/ilhamabdlh/ecommerce/internal/pkg/resilience"
 )
 
 func CircuitBreakerMiddleware(name string) gin.HandlerFunc {
@@ -18,6 +18,13 @@ func CircuitBreakerMiddleware(name string) gin.HandlerFunc {
 	})
 
 	return func(c *gin.Context) {
+		if cb.IsOpen() {
+			c.AbortWithStatusJSON(http.StatusServiceUnavailable, gin.H{
+				"error": "Service temporarily unavailable",
+			})
+			return
+		}
+
 		result, err := cb.Execute(func() (interface{}, error) {
 			c.Next()
 			if c.Writer.Status() >= 500 {

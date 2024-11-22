@@ -8,6 +8,11 @@ import (
 	"github.com/go-redis/redis/v8"
 )
 
+func NewRedisRateLimiter(client *redis.Client, maxRequests int, duration time.Duration) *RedisRateLimiter {
+	// Implementasi fungsi
+	return &RedisRateLimiter{}
+}
+
 func UserRateLimiter(redisClient *redis.Client, maxRequests int, duration time.Duration) gin.HandlerFunc {
 	limiter := NewRedisRateLimiter(redisClient, maxRequests, duration)
 

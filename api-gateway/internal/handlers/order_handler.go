@@ -4,7 +4,7 @@ import (
 	"context"
 	"net/http"
 
-	pb "ecommerce/proto/order"
+	pb "github.com/ilhamabdlh/ecommerce/proto"
 
 	"github.com/gin-gonic/gin"
 )
