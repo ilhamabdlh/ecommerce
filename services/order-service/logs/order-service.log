@@ -1,0 +1,37 @@
+{"level":"FATAL","time":"2024-11-25T03:04:51.125+0700","message":"Failed to start server","error":"listen tcp: address 8084: missing port in address"}
+{"level":"FATAL","time":"2024-11-25T03:04:56.946+0700","message":"Failed to start server","error":"listen tcp: address 8084: missing port in address"}
+{"level":"FATAL","time":"2024-11-25T03:07:17.242+0700","message":"Failed to start server","error":"listen tcp: address 8084: missing port in address"}
+{"level":"INFO","time":"2024-11-25T03:07:36.438+0700","message":"Shutting down server..."}
+{"level":"INFO","time":"2024-11-25T03:07:36.440+0700","message":"Server exiting"}
+{"level":"INFO","time":"2024-11-25T03:15:08.837+0700","message":"Shutting down server..."}
+{"level":"INFO","time":"2024-11-25T03:15:08.859+0700","message":"Server exiting"}
+{"level":"INFO","time":"2024-11-25T03:15:25.793+0700","message":"Request","status":201,"method":"POST","path":"/api/v1/orders/","query":"","latency":101370833,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T03:16:05.886+0700","message":"Request","status":200,"method":"GET","path":"/api/v1/orders/6743895da2754e2adaf4988d","query":"","latency":12141708,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T03:17:10.316+0700","message":"Shutting down server..."}
+{"level":"INFO","time":"2024-11-25T03:17:10.318+0700","message":"Server exiting"}
+{"level":"INFO","time":"2024-11-25T03:18:23.387+0700","message":"Request","status":200,"method":"GET","path":"/api/v1/orders/shop/6743805f17bb1019459a19aa","query":"","latency":7655125,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T03:19:03.385+0700","message":"Request","status":200,"method":"POST","path":"/api/v1/orders/6743895da2754e2adaf4988d/process","query":"","latency":20345583,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T03:19:09.975+0700","message":"Request","status":200,"method":"GET","path":"/api/v1/orders/6743895da2754e2adaf4988d","query":"","latency":1572041,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T03:19:46.400+0700","message":"Request","status":200,"method":"POST","path":"/api/v1/orders/6743895da2754e2adaf4988d/complete","query":"","latency":17826542,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T03:19:50.345+0700","message":"Request","status":200,"method":"GET","path":"/api/v1/orders/6743895da2754e2adaf4988d","query":"","latency":1239542,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T03:20:30.279+0700","message":"Request","status":500,"method":"POST","path":"/api/v1/orders/6743895da2754e2adaf4988d/cancel","query":"","latency":14674208,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T03:20:34.268+0700","message":"Request","status":200,"method":"GET","path":"/api/v1/orders/6743895da2754e2adaf4988d","query":"","latency":2044709,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T03:20:46.286+0700","message":"Request","status":200,"method":"GET","path":"/swagger/index.html","query":"","latency":6224125,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:20:46.361+0700","message":"Request","status":200,"method":"GET","path":"/swagger/swagger-ui.css","query":"","latency":4843958,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:20:46.369+0700","message":"Request","status":200,"method":"GET","path":"/swagger/swagger-ui-standalone-preset.js","query":"","latency":4563750,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:20:46.381+0700","message":"Request","status":200,"method":"GET","path":"/swagger/swagger-ui-bundle.js","query":"","latency":17780542,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:20:47.408+0700","message":"Request","status":500,"method":"GET","path":"/swagger/doc.json","query":"","latency":104542,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:20:47.665+0700","message":"Request","status":200,"method":"GET","path":"/swagger/favicon-32x32.png","query":"","latency":262375,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:20:54.343+0700","message":"Shutting down server..."}
+{"level":"INFO","time":"2024-11-25T03:20:54.344+0700","message":"Server exiting"}
+{"level":"INFO","time":"2024-11-25T03:21:03.867+0700","message":"Request","status":200,"method":"GET","path":"/swagger/index.html","query":"","latency":9333292,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:21:03.972+0700","message":"Request","status":200,"method":"GET","path":"/swagger/swagger-ui.css","query":"","latency":4452416,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:21:03.973+0700","message":"Request","status":200,"method":"GET","path":"/swagger/swagger-ui-standalone-preset.js","query":"","latency":5548375,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:21:03.983+0700","message":"Request","status":200,"method":"GET","path":"/swagger/swagger-ui-bundle.js","query":"","latency":16204500,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:21:04.221+0700","message":"Request","status":200,"method":"GET","path":"/swagger/favicon-32x32.png","query":"","latency":71291,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:21:04.221+0700","message":"Request","status":500,"method":"GET","path":"/swagger/doc.json","query":"","latency":44917,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T03:21:15.861+0700","message":"Shutting down server..."}
+{"level":"INFO","time":"2024-11-25T03:21:15.862+0700","message":"Server exiting"}
+{"level":"INFO","time":"2024-11-25T03:21:24.730+0700","message":"Request","status":200,"method":"GET","path":"/api/v1/orders/user","query":"","latency":37601916,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T03:21:58.297+0700","message":"Shutting down server..."}
+{"level":"INFO","time":"2024-11-25T03:21:58.298+0700","message":"Server exiting"}

@@ -1,0 +1,307 @@
+basePath: /api/v1
+definitions:
+  models.Shop:
+    properties:
+      created_at:
+        type: string
+      description:
+        type: string
+      id:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+      status:
+        description: active, inactive
+        type: string
+      updated_at:
+        type: string
+      warehouses:
+        items:
+          type: string
+        type: array
+    type: object
+host: localhost:8083
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a shop service API documentation
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Shop Service API
+  version: "1.0"
+paths:
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: Get service health status
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Service is healthy
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Check service health
+      tags:
+      - health
+  /ready:
+    get:
+      consumes:
+      - application/json
+      description: Get service readiness status
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Service is ready
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Check service readiness
+      tags:
+      - health
+  /shops:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of all shops
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Shop'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      summary: List all shops
+      tags:
+      - shops
+    post:
+      consumes:
+      - application/json
+      description: Create a new shop with the input payload
+      parameters:
+      - description: Create shop
+        in: body
+        name: shop
+        required: true
+        schema:
+          $ref: '#/definitions/models.Shop'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Shop'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create a new shop
+      tags:
+      - shops
+  /shops/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a shop by its ID
+      parameters:
+      - description: Shop ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid ID format
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete a shop
+      tags:
+      - shops
+    get:
+      consumes:
+      - application/json
+      description: Get details of a specific shop by its ID
+      parameters:
+      - description: Shop ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Shop'
+        "400":
+          description: Invalid ID format
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Shop not found
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Get a shop by ID
+      tags:
+      - shops
+    put:
+      consumes:
+      - application/json
+      description: Update a shop's details by its ID
+      parameters:
+      - description: Shop ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Update shop
+        in: body
+        name: shop
+        required: true
+        schema:
+          $ref: '#/definitions/models.Shop'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Shop'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update a shop
+      tags:
+      - shops
+  /shops/{id}/warehouses/{warehouseId}:
+    delete:
+      consumes:
+      - application/json
+      description: Remove warehouse association from a shop
+      parameters:
+      - description: Shop ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Warehouse ID
+        in: path
+        name: warehouseId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Remove warehouse from shop
+      tags:
+      - shops
+    post:
+      consumes:
+      - application/json
+      description: Associate a warehouse with a shop
+      parameters:
+      - description: Shop ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Warehouse ID
+        in: path
+        name: warehouseId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Add warehouse to shop
+      tags:
+      - shops
+schemes:
+- http
+swagger: "2.0"

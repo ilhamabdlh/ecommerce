@@ -1,0 +1,88 @@
+ecommerce/
+├── docker/
+│   ├── development/
+│   │   ├── Dockerfile
+│   │   ├── Dockerfile.warehouse-service
+│   │   └── docker-compose.yml
+│   ├── production/
+│   │   └── Dockerfile
+│   ├── Dockerfile.warehouse-service
+│   └── docker-compose.yml
+├── k8s/
+│   └── warehouse-service/
+│       ├── configmap.yaml
+│       ├── deployment.yaml
+│       ├── hpa.yaml
+│       ├── ingress.yaml
+│       └── service.yaml
+└── services/
+    └── warehouse-service/
+        ├── config/
+        │   └── config.go
+        ├── discovery/
+        │   └── consul.go
+        ├── docs/
+        │   ├── swagger.go
+        │   └── swagger.yaml
+        ├── grafana/
+        │   └── dashboards/
+        │       └── warehouse.json
+        ├── handlers/
+        │   ├── auth_handler.go
+        │   ├── health_handler.go
+        │   └── warehouse_handler.go
+        ├── internal/
+        │   ├── delivery/
+        │   │   └── http/
+        │   │       └── handler/
+        │   │           └── warehouse_handler.go
+        │   ├── domain/
+        │   │   └── warehouse.go
+        │   ├── repository/
+        │   │   └── mongodb/
+        │   │       └── warehouse_repository.go
+        │   └── usecase/
+        │       └── warehouse_usecase.go
+        ├── jobs/
+        │   └── stock_release.go
+        ├── logs/
+        │   └── warehouse-service.log
+        ├── metrics/
+        │   └── metrics.go
+        ├── middleware/
+        │   ├── auth_middleware.go
+        │   ├── logging_middleware.go
+        │   ├── metrics_middleware.go
+        │   ├── rate_limiter.go
+        │   ├── rbac_middleware.go
+        │   └── security_headers.go
+        ├── models/
+        │   └── warehouse.go
+        ├── prometheus/
+        │   └── rules/
+        │       └── warehouse_alerts.yml
+        ├── repository/
+        │   └── mongodb_repository.go
+        ├── tests/
+        │   ├── integration/
+        │   │   └── warehouse_integration_test.go
+        │   └── warehouse_test.go
+        ├── utils/
+        │   ├── backup.go
+        │   ├── circuit_breaker.go
+        │   ├── errors.go
+        │   ├── jwt.go
+        │   ├── logger.go
+        │   └── validator.go
+        ├── .air.toml
+        ├── .github/
+        │   └── workflows/
+        │       ├── cd.yml
+        │       └── ci.yml
+        ├── Dockerfile
+        ├── Makefile
+        ├── docker-compose.yml
+        ├── go.mod
+        ├── go.sum
+        ├── main.go
+        └── prometheus.yml 

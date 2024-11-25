@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shop-service-config
+  namespace: ecommerce
+data:
+  mongodb_uri: "mongodb://mongodb-service:27017"
+  mongodb_database: "shop_service"
+  server_port: "8083"
+  log_level: "info" 

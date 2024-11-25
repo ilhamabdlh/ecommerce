@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: order-service-config
+  namespace: ecommerce
+data:
+  mongodb_uri: "mongodb://mongodb-service:27017"
+  mongodb_database: "order_service"
+  server_port: "8084"
+  log_level: "info"
+  product_service_url: "http://product-service:8082"
+  shop_service_url: "http://shop-service:8083" 

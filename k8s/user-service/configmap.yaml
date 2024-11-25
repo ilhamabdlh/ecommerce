@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: user-service-config
+data:
+  mongodb_uri: "mongodb://mongodb-service:27017"
+  mongodb_database: "user_service" 

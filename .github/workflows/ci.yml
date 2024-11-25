@@ -1,0 +1,66 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mongodb:
+        image: mongo:latest
+        ports:
+          - 27017:27017
+      redis:
+        image: redis:latest
+        ports:
+          - 6379:6379
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.19
+
+    - name: Install dependencies
+      run: go mod download
+
+    - name: Run tests
+      run: go test -v ./...
+
+    - name: Run integration tests
+      run: go test -tags=integration ./tests/integration/...
+
+    - name: Run benchmarks
+      run: go test -bench=. ./tests/benchmark/...
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build Docker images
+      run: |
+        docker build -t user-service -f docker/Dockerfile.user .
+        docker build -t product-service -f docker/Dockerfile.product .
+        docker build -t order-service -f docker/Dockerfile.order .
+        docker build -t shop-service -f docker/Dockerfile.shop .
+        docker build -t warehouse-service -f docker/Dockerfile.warehouse .
+        docker build -t api-gateway -f docker/Dockerfile.gateway .
+
+    - name: Push to Docker Hub
+      if: github.ref == 'refs/heads/main'
+      run: |
+        echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+        docker push user-service
+        docker push product-service
+        docker push order-service
+        docker push shop-service
+        docker push warehouse-service
+        docker push api-gateway 

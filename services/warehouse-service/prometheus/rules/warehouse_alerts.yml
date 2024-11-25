@@ -1,0 +1,20 @@
+groups:
+  - name: warehouse_alerts
+    rules:
+      - alert: HighRequestRate
+        expr: rate(warehouse_requests_total[5m]) > 100
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: High request rate on warehouse service
+          description: Warehouse service is experiencing high request rate
+
+      - alert: HighErrorRate
+        expr: rate(warehouse_requests_total{status=~"5.."}[5m]) / rate(warehouse_requests_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: High error rate on warehouse service
+          description: Warehouse service error rate is above 10% 

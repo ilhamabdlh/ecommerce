@@ -1,0 +1,21 @@
+{"level":"INFO","time":"2024-11-25T02:21:41.252+0700","message":"Shutting down server..."}
+{"level":"INFO","time":"2024-11-25T02:21:41.252+0700","message":"Server exiting"}
+{"level":"INFO","time":"2024-11-25T02:22:40.022+0700","message":"Shutting down server..."}
+{"level":"INFO","time":"2024-11-25T02:22:40.023+0700","message":"Server exiting"}
+{"level":"INFO","time":"2024-11-25T02:35:15.854+0700","message":"Shutting down server..."}
+{"level":"INFO","time":"2024-11-25T02:35:15.861+0700","message":"Server exiting"}
+{"level":"INFO","time":"2024-11-25T02:37:03.462+0700","message":"Request","status":201,"method":"POST","path":"/api/v1/shops/","query":"","latency":174458667,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T02:37:38.341+0700","message":"Request","status":200,"method":"GET","path":"/api/v1/shops/","query":"","latency":25140625,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T02:38:08.918+0700","message":"Request","status":200,"method":"GET","path":"/api/v1/shops/6743805f17bb1019459a19aa","query":"","latency":3815416,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T02:38:44.852+0700","message":"Request","status":400,"method":"PUT","path":"/api/v1/shops/{shop_id}","query":"","latency":501875,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T02:38:56.999+0700","message":"Request","status":200,"method":"PUT","path":"/api/v1/shops/6743805f17bb1019459a19aa","query":"","latency":10783833,"ip":"::1","user-agent":"PostmanRuntime/7.42.0"}
+{"level":"INFO","time":"2024-11-25T02:41:18.344+0700","message":"Request","status":200,"method":"GET","path":"/health","query":"","latency":2852084,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T02:41:20.133+0700","message":"Request","status":404,"method":"GET","path":"/favicon.ico","query":"","latency":2000,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T02:41:34.440+0700","message":"Request","status":200,"method":"GET","path":"/swagger/index.html","query":"","latency":7097417,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T02:41:34.481+0700","message":"Request","status":200,"method":"GET","path":"/swagger/swagger-ui.css","query":"","latency":6290625,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T02:41:34.484+0700","message":"Request","status":200,"method":"GET","path":"/swagger/swagger-ui-standalone-preset.js","query":"","latency":7962417,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T02:41:34.514+0700","message":"Request","status":200,"method":"GET","path":"/swagger/swagger-ui-bundle.js","query":"","latency":37256458,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T02:41:34.729+0700","message":"Request","status":200,"method":"GET","path":"/swagger/doc.json","query":"","latency":5239041,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T02:41:34.810+0700","message":"Request","status":200,"method":"GET","path":"/swagger/favicon-32x32.png","query":"","latency":384958,"ip":"::1","user-agent":"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"}
+{"level":"INFO","time":"2024-11-25T02:44:42.788+0700","message":"Shutting down server..."}
+{"level":"INFO","time":"2024-11-25T02:44:42.972+0700","message":"Server exiting"}

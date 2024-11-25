@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: warehouse-service
+  labels:
+    app: warehouse-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: warehouse-service
+  template:
+    metadata:
+      labels:
+        app: warehouse-service
+    spec:
+      containers:
+      - name: warehouse-service
+        image: warehouse-service:latest
+        ports:
+        - containerPort: 8084
+        env:
+        - name: MONGO_URI
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: uri
+        - name: DB_NAME
+          value: "warehouse_db"
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8084
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8084
+          initialDelaySeconds: 5
+          periodSeconds: 5 

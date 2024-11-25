@@ -1,0 +1,41 @@
+# Build stage
+FROM golang:1.21-alpine AS builder
+
+# Set GOPROXY
+ENV GOPROXY=https://goproxy.io,direct
+
+# Install git
+RUN apk add --no-cache git
+
+WORKDIR /app
+
+# Copy go mod and sum files
+COPY services/order-service/go.mod services/order-service/go.sum ./
+
+# Download dependencies with retry
+RUN go mod download || (sleep 5 && go mod download) || (sleep 10 && go mod download)
+
+# Copy source code
+COPY services/order-service/ .
+
+# Build the application
+RUN CGO_ENABLED=0 GOOS=linux go build -o main main.go
+
+# Final stage
+FROM alpine:latest
+
+WORKDIR /app
+
+# Copy binary from builder
+COPY --from=builder /app/main .
+
+# Copy config files if any
+COPY --from=builder /app/config ./config
+
+# Create logs directory
+RUN mkdir -p /app/logs
+
+EXPOSE 8084
+
+# Run the application
+CMD ["./main"] 

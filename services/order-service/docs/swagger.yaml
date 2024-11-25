@@ -1,0 +1,328 @@
+basePath: /api/v1
+definitions:
+  models.Order:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/models.OrderItem'
+        type: array
+      payment_id:
+        type: string
+      shop_id:
+        type: string
+      status:
+        $ref: '#/definitions/models.OrderStatus'
+      total_amount:
+        type: number
+      updated_at:
+        type: string
+      user_id:
+        type: string
+    type: object
+  models.OrderItem:
+    properties:
+      price:
+        type: number
+      product_id:
+        type: string
+      quantity:
+        type: integer
+    type: object
+  models.OrderStatus:
+    enum:
+    - pending
+    - processing
+    - completed
+    - cancelled
+    type: string
+    x-enum-varnames:
+    - OrderStatusPending
+    - OrderStatusProcessing
+    - OrderStatusCompleted
+    - OrderStatusCancelled
+host: localhost:8084
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is an order service API documentation
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Order Service API
+  version: "1.0"
+paths:
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: Get service health status
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Service is healthy
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Check service health
+      tags:
+      - health
+  /orders:
+    post:
+      consumes:
+      - application/json
+      description: Create a new order with the input payload
+      parameters:
+      - description: Create order
+        in: body
+        name: order
+        required: true
+        schema:
+          $ref: '#/definitions/models.Order'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Order'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Create a new order
+      tags:
+      - orders
+  /orders/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get details of a specific order by its ID
+      parameters:
+      - description: Order ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Order'
+        "400":
+          description: Invalid ID format
+          schema:
+            additionalProperties: true
+            type: object
+        "404":
+          description: Order not found
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get an order by ID
+      tags:
+      - orders
+  /orders/{id}/cancel:
+    post:
+      consumes:
+      - application/json
+      description: Change order status to cancelled
+      parameters:
+      - description: Order ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid ID format
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Cancel an order
+      tags:
+      - orders
+  /orders/{id}/complete:
+    post:
+      consumes:
+      - application/json
+      description: Change order status to completed
+      parameters:
+      - description: Order ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid ID format
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Complete an order
+      tags:
+      - orders
+  /orders/{id}/process:
+    post:
+      consumes:
+      - application/json
+      description: Change order status to processing
+      parameters:
+      - description: Order ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success message
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Invalid ID format
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Process an order
+      tags:
+      - orders
+  /orders/shop/{shopId}:
+    get:
+      consumes:
+      - application/json
+      description: Get all orders for a specific shop
+      parameters:
+      - description: Shop ID
+        in: path
+        name: shopId
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Order'
+            type: array
+        "400":
+          description: Invalid ID format
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get shop's orders
+      tags:
+      - orders
+  /orders/user:
+    get:
+      consumes:
+      - application/json
+      description: Get all orders for the authenticated user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Order'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties: true
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties: true
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get user's orders
+      tags:
+      - orders
+  /ready:
+    get:
+      consumes:
+      - application/json
+      description: Get service readiness status
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Service is ready
+          schema:
+            additionalProperties: true
+            type: object
+      summary: Check service readiness
+      tags:
+      - health
+schemes:
+- http
+swagger: "2.0"

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-service-config
+  namespace: ecommerce
+data:
+  mongodb_uri: "mongodb://mongodb-service:27017"
+  mongodb_database: "product_service"
+  server_port: "8082"
+  log_level: "info" 

@@ -1,0 +1,449 @@
+basePath: /api/v1
+definitions:
+  handlers.HealthResponse:
+    properties:
+      services:
+        additionalProperties:
+          type: string
+        type: object
+      status:
+        type: string
+      timestamp:
+        type: string
+    type: object
+  handlers.TokenRequest:
+    properties:
+      roles:
+        items:
+          type: string
+        type: array
+      user_id:
+        type: string
+    required:
+    - roles
+    - user_id
+    type: object
+  models.StockTransfer:
+    properties:
+      from_warehouse:
+        type: string
+      product_id:
+        type: string
+      quantity:
+        type: integer
+      status:
+        description: '"pending", "completed", "failed"'
+        type: string
+      to_warehouse:
+        type: string
+      transfer_date:
+        type: string
+    required:
+    - from_warehouse
+    - product_id
+    - quantity
+    - to_warehouse
+    type: object
+  models.Warehouse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      location:
+        type: string
+      name:
+        type: string
+      status:
+        description: '"active" atau "inactive"'
+        type: string
+      stock:
+        additionalProperties:
+          type: integer
+        description: map productID to quantity
+        type: object
+      updated_at:
+        type: string
+    required:
+    - location
+    - name
+    type: object
+host: localhost:8084
+info:
+  contact: {}
+  description: This is a warehouse service server.
+  title: Warehouse Service API
+  version: "1.0"
+paths:
+  /api/v1/auth/token:
+    post:
+      consumes:
+      - application/json
+      description: Generate JWT token for testing
+      parameters:
+      - description: Token Request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/handlers.TokenRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Generate JWT token
+      tags:
+      - auth
+  /api/v1/warehouses:
+    get:
+      description: Get list of all warehouses
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Warehouse'
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get all warehouses
+      tags:
+      - warehouses
+    post:
+      consumes:
+      - application/json
+      description: Create a new warehouse
+      parameters:
+      - description: Warehouse Info
+        in: body
+        name: warehouse
+        required: true
+        schema:
+          $ref: '#/definitions/models.Warehouse'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Warehouse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create new warehouse
+      tags:
+      - warehouses
+  /api/v1/warehouses/{id}:
+    get:
+      description: Get warehouse details by ID
+      parameters:
+      - description: Warehouse ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Warehouse'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get warehouse by ID
+      tags:
+      - warehouses
+  /api/v1/warehouses/{id}/{status}:
+    put:
+      consumes:
+      - application/json
+      description: Activate or deactivate warehouse
+      parameters:
+      - description: Warehouse ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Status (activate/deactivate)
+        in: path
+        name: status
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update warehouse status
+      tags:
+      - warehouses
+  /api/v1/warehouses/{id}/stock:
+    put:
+      consumes:
+      - application/json
+      description: Update product stock in warehouse
+      parameters:
+      - description: Warehouse ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Stock Update
+        in: body
+        name: update
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update stock
+      tags:
+      - warehouses
+  /api/v1/warehouses/transfer:
+    post:
+      consumes:
+      - application/json
+      description: Transfer stock from one warehouse to another
+      parameters:
+      - description: Transfer Details
+        in: body
+        name: transfer
+        required: true
+        schema:
+          $ref: '#/definitions/models.StockTransfer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Transfer stock between warehouses
+      tags:
+      - warehouses
+  /health:
+    get:
+      description: Get service health status
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handlers.HealthResponse'
+      summary: Health Check
+      tags:
+      - health
+  /warehouses:
+    get:
+      description: Get list of all warehouses
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Warehouse'
+            type: array
+      summary: Get all warehouses
+      tags:
+      - warehouses
+    post:
+      consumes:
+      - application/json
+      description: Create a new warehouse
+      parameters:
+      - description: Warehouse Info
+        in: body
+        name: warehouse
+        required: true
+        schema:
+          $ref: '#/definitions/models.Warehouse'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Warehouse'
+      summary: Create new warehouse
+      tags:
+      - warehouses
+  /warehouses/{id}:
+    get:
+      description: Get warehouse details by ID
+      parameters:
+      - description: Warehouse ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Warehouse'
+      summary: Get warehouse by ID
+      tags:
+      - warehouses
+  /warehouses/{id}/{status}:
+    put:
+      consumes:
+      - application/json
+      description: Activate or deactivate warehouse
+      parameters:
+      - description: Warehouse ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Status (activate/deactivate)
+        in: path
+        name: status
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Status updated successfully
+          schema:
+            type: string
+      summary: Update warehouse status
+      tags:
+      - warehouses
+  /warehouses/{id}/stock:
+    put:
+      consumes:
+      - application/json
+      description: Update product stock in warehouse
+      parameters:
+      - description: Warehouse ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Stock Update
+        in: body
+        name: update
+        required: true
+        schema:
+          additionalProperties: true
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Stock updated successfully
+          schema:
+            type: string
+      summary: Update stock
+      tags:
+      - warehouses
+  /warehouses/transfer:
+    post:
+      consumes:
+      - application/json
+      description: Transfer stock between warehouses
+      parameters:
+      - description: Transfer Details
+        in: body
+        name: transfer
+        required: true
+        schema:
+          $ref: '#/definitions/models.StockTransfer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Stock transferred successfully
+          schema:
+            type: string
+      summary: Transfer stock
+      tags:
+      - warehouses
+swagger: "2.0"

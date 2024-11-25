@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shop-service
+  namespace: ecommerce
+  labels:
+    app: shop-service
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: shop-service
+  template:
+    metadata:
+      labels:
+        app: shop-service
+    spec:
+      containers:
+      - name: shop-service
+        image: ecommerce/shop-service:latest
+        ports:
+        - containerPort: 8083
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            configMapKeyRef:
+              name: shop-service-config
+              key: mongodb_uri
+        - name: MONGODB_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: shop-service-config
+              key: mongodb_database
+        - name: JWT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: shop-service-secret
+              key: jwt_secret
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "200m"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8083
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 8083
+          initialDelaySeconds: 5
+          periodSeconds: 5 
