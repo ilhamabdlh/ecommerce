@@ -32,7 +32,7 @@ Handles order processing:
 - Payment integration
 - Order history
 
-### 5. Warehouse Service (Port: 8084)
+### 5. Warehouse Service (Port: 8085)
 Manages inventory and stock:
 - Stock management
 - Multi-warehouse support
@@ -134,7 +134,7 @@ Manages inventory and stock:
 3. Test the API:
    ```bash
    # Generate JWT token
-   curl -X POST http://localhost:8084/api/v1/auth/token \
+   curl -X POST http://localhost:8085/api/v1/auth/token \
      -H "Content-Type: application/json" \
      -d '{
        "user_id": "user123",
@@ -145,7 +145,7 @@ Manages inventory and stock:
    export TOKEN="<token-from-response>"
 
    # Create warehouse
-   curl -X POST http://localhost:8084/api/v1/warehouses \
+   curl -X POST http://localhost:8085/api/v1/warehouses \
      -H "Content-Type: application/json" \
      -H "Authorization: Bearer $TOKEN" \
      -d '{
@@ -154,7 +154,7 @@ Manages inventory and stock:
      }'
 
    # Get all warehouses
-   curl http://localhost:8084/api/v1/warehouses \
+   curl http://localhost:8085/api/v1/warehouses \
      -H "Authorization: Bearer $TOKEN"
    ```
 
@@ -231,7 +231,7 @@ Manages inventory and stock:
 | Product Service | http://localhost:8082 | http://localhost:8082/swagger/index.html |
 | Shop Service | http://localhost:8083 | http://localhost:8083/swagger/index.html |
 | Order Service | http://localhost:8084 | http://localhost:8084/swagger/index.html |
-| Warehouse Service | http://localhost:8084 | http://localhost:8084/swagger/index.html |
+| Warehouse Service | http://localhost:8085 | http://localhost:8085/swagger/index.html |
 
 ### Monitoring
 
@@ -242,3 +242,54 @@ Manages inventory and stock:
 | Service Metrics | http://localhost:8084/metrics | N/A |
 
 ### Development Commands
+
+### API Documentation
+
+#### Postman Collection
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://warped-eclipse-691260.postman.co/workspace/binary~a677502a-2330-4346-9ae5-c38535abca72/collection/36495103-05fa9abb-2a53-4234-a472-b7bf1031a696?action=share&creator=36495103)
+
+Collection includes:
+
+1. Order Service Endpoints:
+   - POST `/api/v1/orders` - Create new order
+   - GET `/api/v1/orders/{order_id}` - Get order by ID
+   - GET `/api/v1/orders/user` - Get user orders
+   - GET `/api/v1/orders/shop/{shop_id}` - Get shop orders
+   - POST `/api/v1/orders/{order_id}/process` - Process order
+   - POST `/api/v1/orders/{order_id}/complete` - Complete order
+   - POST `/api/v1/orders/{order_id}/cancel` - Cancel order
+
+2. Product Service Endpoints:
+   - POST `/api/v1/products` - Create product
+   - GET `/api/v1/products` - Get all products
+   - GET `/api/v1/products/{product_id}` - Get product by ID
+   - PUT `/api/v1/products/{product_id}` - Update product
+   - PATCH `/api/v1/products/{product_id}/stock` - Update stock
+   - DELETE `/api/v1/products/{product_id}` - Delete product
+
+3. Shop Service Endpoints:
+   - GET `/api/v1/shops/{shop_id}` - Get shop by ID
+   - GET `/api/v1/shops` - Get all shops
+   - POST `/api/v1/shops` - Create shop
+   - PUT `/api/v1/shops/{shop_id}` - Update shop
+   - POST `/api/v1/shops/{shop_id}/warehouses/{warehouse_id}` - Add warehouse to shop
+   - DELETE `/api/v1/shops/{shop_id}/warehouses/{warehouse_id}` - Remove warehouse from shop
+   - DELETE `/api/v1/shops/{shop_id}` - Delete shop
+
+4. User Service Endpoints:
+   - POST `/api/v1/auth/register` - Register new user
+   - POST `/api/v1/auth/login` - Login user
+   - GET `/api/v1/users/me` - Get current user
+   - PUT `/api/v1/users/me` - Update user profile
+
+5. Warehouse Service Endpoints:
+   - PUT `/api/v1/warehouses/{warehouse_id}/stock` - Update stock
+   - POST `/api/v1/warehouses` - Create warehouse
+   - POST `/api/v1/auth/token` - Generate JWT token
+   - GET `/api/v1/warehouses` - Get all warehouses
+   - GET `/api/v1/warehouses/{warehouse_id}` - Get warehouse by ID
+   - PUT `/api/v1/warehouses/{id}/stock` - Update stock
+   - POST `/api/v1/warehouses/transfer` - Transfer stock
+   - PUT `/api/v1/warehouses/{id}/{status}` - Update warehouse status (activate/deactivate)
+
